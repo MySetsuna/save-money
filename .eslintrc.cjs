@@ -12,7 +12,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'solid'],
   rules: {
-    'no-unused-vars': ['error'],
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'func-call-spacing': 0,
     'space-before-function-paren': [
       'error',

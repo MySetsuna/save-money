@@ -1,4 +1,4 @@
-.App{
+.App {
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
@@ -11,35 +11,36 @@
   top: 0;
   left: 0;
   box-shadow: 0px 0px 11px -2px;
-  background-color: rgba(255,255,255,1);
+  background-color: rgba(255, 255, 255, 1);
   z-index: 9999;
 }
 
-.navContent{
+.navContent {
   height: 64px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.main{
+.main {
   display: flex;
   flex: auto;
   width: 100%;
   overflow-x: auto;
 }
 
-.sider{
+.sider {
   position: sticky;
   top: 0;
   left: 0;
-  max-height: calc( 100vh - 64px) ;
-  background-color: rgba(255,255,255,1);
+  max-height: calc(100vh - 64px);
+  background-color: rgba(255, 255, 255, 1);
   overflow: auto;
   box-shadow: 0px 0px 50px -24px;
   z-index: 1;
+  flex-shrink: 0;
 }
 
-.content{
+.content {
   flex: auto;
 }

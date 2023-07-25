@@ -7,7 +7,7 @@ import { MIN_MAIN_SIDER_WIDTH } from '../../constant';
 const Sider: Component<{ children: JSX.Element; className?: string }> = (
   props
 ) => {
-  const { setMainSiderWidth, mainSiderWidth } = useLocalConfig();
+  const { setMainSiderWidth, store: configStore } = useLocalConfig();
   const [store, setStore] = createStore({ moving: false, hidden: false });
   // window.setMainSiderWidth = setMainSiderWidth;
 
@@ -35,7 +35,7 @@ const Sider: Component<{ children: JSX.Element; className?: string }> = (
   };
 
   onMount(() => {
-    setStore({ hidden: mainSiderWidth() < MIN_MAIN_SIDER_WIDTH });
+    setStore({ hidden: configStore.mainSiderWidth < MIN_MAIN_SIDER_WIDTH });
   });
 
   return (
@@ -43,7 +43,7 @@ const Sider: Component<{ children: JSX.Element; className?: string }> = (
       <div
         class={[styles.siderBox, props.className].join(' ')}
         classList={{ [styles.hidden]: store.hidden }}
-        style={{ width: `${mainSiderWidth()}px` }}
+        style={{ width: `${configStore.mainSiderWidth}px` }}
       >
         {props.children}
         <div class={styles.dragBar} draggable onMouseDown={handleMouseDown}>
