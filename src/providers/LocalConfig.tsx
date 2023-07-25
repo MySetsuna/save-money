@@ -9,9 +9,7 @@ import {
 import { createStore } from 'solid-js/store';
 
 type DashboardType = {
-  name: string;
   key: string;
-  type: string;
   span: number;
 };
 
