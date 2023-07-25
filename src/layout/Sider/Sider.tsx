@@ -18,6 +18,7 @@ const Sider: Component<{ children: JSX.Element; className?: string }> = (
     setStore({ moving: true });
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseup', clearEvent);
+    document.body.style.cursor = 'w-resize';
   };
 
   const handleMouseMove = (event: MouseEvent) => {
@@ -32,6 +33,7 @@ const Sider: Component<{ children: JSX.Element; className?: string }> = (
     setStore({ moving: false });
     document.removeEventListener('mousemove', handleMouseMove);
     document.removeEventListener('mouseup', clearEvent);
+    document.body.style.cursor = 'default';
   };
 
   onMount(() => {
