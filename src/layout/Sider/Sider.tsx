@@ -50,7 +50,7 @@ const Sider: Component<{ children: JSX.Element; className?: string }> = (
           <div
             classList={{
               [styles.dragLine]: true,
-              [styles.moving]: store.moving
+              [styles.moving]: store.moving,
             }}
           />
         </div>
@@ -60,7 +60,7 @@ const Sider: Component<{ children: JSX.Element; className?: string }> = (
           <div
             classList={{
               [styles.dragLine]: true,
-              [styles.moving]: store.moving
+              [styles.moving]: store.moving,
             }}
           />
         </div>
