@@ -12,11 +12,6 @@ const Header: Component = () => {
   return (
     <nav class={styles.nav}>
       <div class={styles.navContent}>
-        <div style={{ position: 'absolute', left: 0 }}>
-          <Suspense fallback={'loading...'}>
-            {userStore().user().userName}
-          </Suspense>
-        </div>
         {localConfigStore().header instanceof Array
           ? (
           <For each={localConfigStore().header as string[]}>
@@ -28,6 +23,11 @@ const Header: Component = () => {
           : (
           <Dynamic component={headerMap[localConfigStore().header as string]} />
             )}
+        <div style={{ 'padding-left': '10px', width: '50px' }}>
+          <Suspense fallback={'loading...'}>
+            {userStore().user().userName}
+          </Suspense>
+        </div>
       </div>
     </nav>
   );
