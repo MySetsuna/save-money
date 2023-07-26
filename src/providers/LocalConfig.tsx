@@ -1,73 +1,60 @@
-import {
-  createContext,
-  useContext,
-  JSXElement,
-  Component,
-  mergeProps,
-  onMount,
-} from 'solid-js';
+import { createContext, useContext, createMemo } from 'solid-js';
 import { createStore } from 'solid-js/store';
+import {
+  DASHBOARDS_KEY,
+  DEFAULT_SIDER_RESIZER_COLOR,
+  DEFAULT_SIDER_SIDER_WIDTH,
+  MAIN_SIDER_WIDTH_KEY,
+  SIDER_RESIZER_COLOR_KEY
+} from '../constant';
+import {
+  ColorString,
+  DashboardType,
+  LocalConfigContextValue,
+  WithChildrenComponent
+} from '../types';
 
-type DashboardType = {
-  name: string;
-  key: string;
-  type: string;
-  span: number;
-};
+const LocalConfigContext = createContext<LocalConfigContextValue>();
 
-const LocalConfigContext = createContext<{
-  store: { mainSiderWidth: number; dashboards: DashboardType[] };
-  setMainSiderWidth: (_value: number) => void;
-  setDashboards: (_value: DashboardType[]) => void;
-}>();
-
-export const LocalConfigProvider: Component<{
-  children: JSXElement;
-}> = (props) => {
-  const localMainSiderWidthd = localStorage.getItem('mainSiderWidth');
-  const localDashboards = localStorage.getItem('dashboards');
-  const merged = mergeProps(
-    {
-      mainSiderWidth: parseInt(localMainSiderWidthd as string),
-      dashboards: JSON.parse(localDashboards ?? 'null') || [
-        { name: 'CostTypeBar', key: 'CostTypeBar', type: 'bar', span: 24 },
-        { name: 'CostDailyList', key: 'CostDailyList', type: 'list', span: 24 },
-      ],
-    },
-    props
-  );
+export const LocalConfigProvider: WithChildrenComponent = (props) => {
+  const localMainSiderWidthd = localStorage.getItem(MAIN_SIDER_WIDTH_KEY);
+  const localDashboards = localStorage.getItem(DASHBOARDS_KEY);
+  const siderResizerColor = localStorage.getItem(SIDER_RESIZER_COLOR_KEY);
 
   const [store, setStore] = createStore<{
     mainSiderWidth: number;
     dashboards: DashboardType[];
+    siderResizerColor: ColorString;
   }>({
-    mainSiderWidth: 500,
-    dashboards: [],
+    mainSiderWidth:
+      parseInt(localMainSiderWidthd as string) ?? DEFAULT_SIDER_SIDER_WIDTH,
+    dashboards: JSON.parse(localDashboards ?? 'null') || [
+      { name: 'CostTypeBar', key: 'CostTypeBar', type: 'bar', span: 24 },
+      { name: 'CostDailyList', key: 'CostDailyList', type: 'list', span: 24 }
+    ],
+    siderResizerColor: siderResizerColor ?? DEFAULT_SIDER_RESIZER_COLOR
   });
 
-  onMount(() => {
-    console.log(merged.dashboards, 'merged.dashboards');
-
-    setStore({
-      mainSiderWidth: merged.mainSiderWidth ? merged.mainSiderWidth : 500,
-      dashboards: merged.dashboards,
-    });
+  const contextValue = createMemo(() => {
+    return {
+      ...store,
+      setMainSiderWidth: (value: number) => {
+        setStore({ mainSiderWidth: value });
+        localStorage.setItem(MAIN_SIDER_WIDTH_KEY, `${value}`);
+      },
+      setDashboards: (value: DashboardType[]) => {
+        setStore({ dashboards: value });
+        localStorage.setItem(DASHBOARDS_KEY, JSON.stringify(value));
+      },
+      setSiderResizerColor: (value: ColorString) => {
+        setStore({ siderResizerColor: value });
+        localStorage.setItem(SIDER_RESIZER_COLOR_KEY, `${value}`);
+      }
+    };
   });
 
   return (
-    <LocalConfigContext.Provider
-      value={{
-        store,
-        setMainSiderWidth: (value: number) => {
-          setStore({ mainSiderWidth: value });
-          localStorage.setItem('mainSiderWidth', `${value}`);
-        },
-        setDashboards: (value: DashboardType[]) => {
-          setStore({ dashboards: value });
-          localStorage.setItem('dashboards', JSON.stringify(value));
-        },
-      }}
-    >
+    <LocalConfigContext.Provider value={contextValue}>
       {props.children}
     </LocalConfigContext.Provider>
   );

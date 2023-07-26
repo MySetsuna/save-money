@@ -1,16 +1,25 @@
-import type { Component } from 'solid-js';
+import { Suspense, type Component } from 'solid-js';
 import styles from './App.module.css';
 import Sider from './layout/Sider/Sider';
 import MainContent from './layout/MainContent/MainContent';
 import RouteList from './components/RouteList/RouteList';
 import config from './config';
 import RouteContent from './components/RouteContent/RouteContent';
+import Header from './layout/Header';
+import { useUser } from './providers/User';
 
 const App: Component = () => {
+  const userStore = useUser();
   return (
     <div class={styles.App}>
       <nav class={styles.nav}>
-        <div class={styles.navContent}>virtual-table</div>
+        <div class={styles.navContent}>
+          <Header>
+            <Suspense fallback={'loading...'}>
+              {userStore().user()?.userName}
+            </Suspense>
+          </Header>
+        </div>
       </nav>
       <main class={styles.main}>
         <div class={styles.sider}>

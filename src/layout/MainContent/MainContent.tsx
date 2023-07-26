@@ -1,5 +1,7 @@
-import type { Component, JSX } from 'solid-js';
-const MainContent: Component<{ children: JSX.Element }> = (props) => {
-  return <>{props.children}</>;
+import { children } from 'solid-js';
+import { WithChildrenComponent } from '../../types';
+const MainContent: WithChildrenComponent = (props) => {
+  const childContent = children(() => props.children);
+  return <>{childContent()}</>;
 };
 export default MainContent;

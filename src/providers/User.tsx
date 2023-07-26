@@ -4,24 +4,12 @@ import {
   useContext,
   createResource,
   createEffect,
-  JSXElement,
-  Setter,
-  Resource
+  createMemo
 } from 'solid-js';
 import { useNavigate } from '@solidjs/router';
+import { UserCotextValue, WithChildrenComponent } from '../types';
 
-const UserContext = createContext<
-  [
-    Resource<{ id: number; userName: string }>,
-    {
-      setUserId: Setter<string>;
-      mutate: Setter<{ id: number; userName: string }>;
-      refetch: (
-        info?: Promise<{ id: number; userName: string }> | undefined
-      ) => unknown;
-    }
-  ]
->();
+const UserContext = createContext<UserCotextValue>();
 
 const fetchUser = async (userId?: number) => {
   return await new Promise<{ id: number; userName: string }>(
@@ -37,7 +25,9 @@ const fetchUser = async (userId?: number) => {
   );
 };
 
-export function UserProvider(props: { userId?: number; children: JSXElement }) {
+export const UserProvider: WithChildrenComponent<{ userId?: number }> = (
+  props
+) => {
   const navigate = useNavigate();
   const localUserId = localStorage.getItem('userId');
   const [userId, setUserId] = createSignal(
@@ -57,24 +47,22 @@ export function UserProvider(props: { userId?: number; children: JSXElement }) {
     }
   });
 
+  const contextValue = createMemo(() => ({
+    user,
+    setUserId,
+    mutate,
+    refetch
+  }));
+
   return (
-    <UserContext.Provider
-      value={[
-        user,
-        {
-          setUserId,
-          mutate,
-          refetch
-        }
-      ]}
-    >
+    <UserContext.Provider value={contextValue}>
       {props.children}
     </UserContext.Provider>
   );
-}
+};
 
 export function useUser() {
-  const context = useContext(UserContext);
+  const context = useContext<UserCotextValue | undefined>(UserContext);
   if (context) {
     return context;
   }

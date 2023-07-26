@@ -4,8 +4,7 @@ import config from '../../config';
 import { useLocalConfig } from '../../providers/LocalConfig';
 
 const Dashboard = () => {
-  const { store } = useLocalConfig();
-  console.log(store.dashboards, 'dashboards');
+  const configStore = useLocalConfig();
 
   return (
     <div
@@ -13,10 +12,10 @@ const Dashboard = () => {
         display: 'flex',
         gap: '24px',
         margin: '24px',
-        'flex-wrap': 'wrap',
+        'flex-wrap': 'wrap'
       }}
     >
-      <For each={store.dashboards}>
+      <For each={configStore().dashboards}>
         {(dashboard) => (
           <div style={{ width: `${dashboard.span}%`, 'min-width': '120px' }}>
             <Dynamic
