@@ -10,7 +10,7 @@ export type WithChildrenProps<P = {}> = P & { children: JSX.Element };
 export type WithChildrenComponent<P = {}> = Component<WithChildrenProps<P>>;
 
 export type CommonProps<P = {}> = P & { children?: JSX.Element };
-export type CommonComponent<P = {}> = P & { children: JSX.Element };
+export type CommonComponent<P = {}> = Component<CommonProps<P>>;
 
 export type UserCotextValue = Accessor<{
   user: InitializedResource<{
@@ -48,6 +48,7 @@ export type DashboardType = {
 export type ColorString = string | number;
 
 export type LocalConfigContextValue = Accessor<{
+  header?: string | string[];
   siderResizerColor?: ColorString;
   setSiderResizerColor: (_value: ColorString) => void;
   mainSiderWidth: number;

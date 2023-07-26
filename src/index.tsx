@@ -8,7 +8,7 @@ import { Router } from '@solidjs/router';
 import { UserProvider } from './providers/User';
 import { LocalConfigProvider } from './providers/LocalConfig';
 import SignIn from './pages/SignIn';
-import Header from './layout/Header';
+import CommonHeader from './layout/Header/components/CommonHeader';
 
 const root = document.getElementById('root');
 
@@ -24,7 +24,7 @@ render(
       <ErrorBoundary
         fallback={() => (
           <>
-            <Header>登录</Header>
+            <CommonHeader>登录</CommonHeader>
             <SignIn />
           </>
         )}
