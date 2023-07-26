@@ -1,6 +1,5 @@
 import { Component } from 'solid-js';
-import CostDailyList from '../components/Dashboard/components/ConstDailyList';
-import CostTypeBar from '../components/Dashboard/components/CostTypeBar';
+import { CostDailyList, CostTypeBar } from '../pages/Dashboard';
 
 const dashboardMap: { [propName: string]: Component } = {
   CostTypeBar,

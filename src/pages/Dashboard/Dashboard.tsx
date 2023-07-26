@@ -1,9 +1,9 @@
-import { For } from 'solid-js';
+import { Component, For } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
 import config from '../../config';
 import { useLocalConfig } from '../../providers/LocalConfig';
 
-const Dashboard = () => {
+const Dashboard: Component = () => {
   const configStore = useLocalConfig();
 
   return (
