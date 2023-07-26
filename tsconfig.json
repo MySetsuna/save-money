@@ -11,7 +11,16 @@
     "types": ["vite/client"],
     "noEmit": true,
     "isolatedModules": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "resolveJsonModule": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "public/**/*.ts", "public/**/*.tsx"],
-  "exclude": ["node_modules", "build", "dist"]
+  "exclude": ["node_modules", "build", "dist"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "public/**/*.ts",
+    "public/**/*.tsx"
+  ]
 }

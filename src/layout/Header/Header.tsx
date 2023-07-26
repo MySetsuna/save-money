@@ -20,12 +20,8 @@ const Header: Component = () => {
         {localConfigStore().header instanceof Array
           ? (
           <For each={localConfigStore().header as string[]}>
-            {() => {
-              return (
-                <Dynamic
-                  component={headerMap[localConfigStore().header as string]}
-                />
-              );
+            {(header) => {
+              return <Dynamic component={headerMap[header]} />;
             }}
           </For>
             )
