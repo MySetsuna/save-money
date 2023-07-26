@@ -19,9 +19,9 @@ module.exports = {
       { asyncArrow: 'always', named: 'never' },
     ],
     quotes: [1, 'single'],
-    // 'comma-dangle': [
-    //   'error',
-    //   { arrays: 'always-multiline', objects: 'always-multiline' }
-    // ]
+    'comma-dangle': [
+      'error',
+      { arrays: 'always-multiline', objects: 'always-multiline' },
+    ],
   },
 };

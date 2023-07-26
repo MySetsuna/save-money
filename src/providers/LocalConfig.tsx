@@ -30,9 +30,9 @@ export const LocalConfigProvider: WithChildrenComponent = (props) => {
       parseInt(localMainSiderWidthd as string) ?? DEFAULT_SIDER_SIDER_WIDTH,
     dashboards: JSON.parse(localDashboards ?? 'null') || [
       { name: 'CostTypeBar', key: 'CostTypeBar', type: 'bar', span: 24 },
-      { name: 'CostDailyList', key: 'CostDailyList', type: 'list', span: 24 }
+      { name: 'CostDailyList', key: 'CostDailyList', type: 'list', span: 24 },
     ],
-    siderResizerColor: siderResizerColor ?? DEFAULT_SIDER_RESIZER_COLOR
+    siderResizerColor: siderResizerColor ?? DEFAULT_SIDER_RESIZER_COLOR,
   });
 
   const contextValue = createMemo(() => {
@@ -49,7 +49,7 @@ export const LocalConfigProvider: WithChildrenComponent = (props) => {
       setSiderResizerColor: (value: ColorString) => {
         setStore({ siderResizerColor: value });
         localStorage.setItem(SIDER_RESIZER_COLOR_KEY, `${value}`);
-      }
+      },
     };
   });
 

@@ -1,4 +1,10 @@
-import { Component, JSX, Accessor, Resource, Setter } from 'solid-js';
+import {
+  Component,
+  JSX,
+  Accessor,
+  Setter,
+  InitializedResource
+} from 'solid-js';
 
 export type WithChildrenProps<P = {}> = P & { children: JSX.Element };
 export type WithChildrenComponent<P = {}> = Component<WithChildrenProps<P>>;
@@ -7,18 +13,15 @@ export type CommonProps<P = {}> = P & { children?: JSX.Element };
 export type CommonComponent<P = {}> = P & { children: JSX.Element };
 
 export type UserCotextValue = Accessor<{
-  user: Resource<{
+  user: InitializedResource<{
     id: number;
     userName: string;
   }>;
   setUserId: Setter<number>;
-  mutate: Setter<
-    | {
-        id: number;
-        userName: string;
-      }
-    | undefined
-  >;
+  mutate: Setter<{
+    id: number;
+    userName: string;
+  }>;
   refetch: (_info?: unknown) =>
     | {
         id: number;
@@ -52,3 +55,9 @@ export type LocalConfigContextValue = Accessor<{
   setMainSiderWidth: (_value: number) => void;
   setDashboards: (_value: DashboardType[]) => void;
 }>;
+
+export type RouteItem = {
+  key: string;
+  value?: JSX.Element;
+  component: Component;
+};

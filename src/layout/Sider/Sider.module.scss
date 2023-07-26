@@ -1,3 +1,14 @@
+.sider {
+  position: sticky;
+  top: 0;
+  left: 0;
+  max-height: calc(100vh - 64px);
+  background-color: rgba(255, 255, 255, 1);
+  overflow: auto;
+  box-shadow: -3px 0px 8px 0px;
+  z-index: 1;
+  flex-shrink: 0;
+}
 .siderBox {
   display: flex;
   flex-direction: column;
@@ -33,12 +44,12 @@
   height: 100%;
   right: 0;
   box-sizing: border-box;
-  width: 6px;
+  width: 3px;
   cursor: w-resize;
   z-index: 100;
   .dragLine {
     opacity: 0;
-    width: 4px;
+    width: 3px;
     height: 100%;
     transition: all 0.3s ease-in-out;
   }

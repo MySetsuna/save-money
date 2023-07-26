@@ -12,7 +12,7 @@ const Dashboard = () => {
         display: 'flex',
         gap: '24px',
         margin: '24px',
-        'flex-wrap': 'wrap'
+        'flex-wrap': 'wrap',
       }}
     >
       <For each={configStore().dashboards}>

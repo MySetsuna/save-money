@@ -10,7 +10,7 @@ const Sider: WithChildrenComponent<{ className?: string }> = (props) => {
   const configStore = useLocalConfig();
   const [store, setStore] = createStore({
     moving: false,
-    hidden: configStore().mainSiderWidth < MIN_MAIN_SIDER_WIDTH
+    hidden: configStore().mainSiderWidth < MIN_MAIN_SIDER_WIDTH,
   });
 
   const handleMouseDown = (event: MouseEvent) => {
@@ -37,7 +37,7 @@ const Sider: WithChildrenComponent<{ className?: string }> = (props) => {
   };
 
   return (
-    <>
+    <div class={styles.sider}>
       <div
         class={[styles.siderBox, props.className].join(' ')}
         classList={{ [styles.hidden]: store.hidden }}
@@ -49,7 +49,7 @@ const Sider: WithChildrenComponent<{ className?: string }> = (props) => {
             style={{ 'background-color': `${configStore().siderResizerColor}` }}
             classList={{
               [styles.dragLine]: true,
-              [styles.moving]: store.moving
+              [styles.moving]: store.moving,
             }}
           />
         </div>
@@ -60,12 +60,12 @@ const Sider: WithChildrenComponent<{ className?: string }> = (props) => {
             style={{ 'background-color': `${configStore().siderResizerColor}` }}
             classList={{
               [styles.dragLine]: true,
-              [styles.moving]: store.moving
+              [styles.moving]: store.moving,
             }}
           />
         </div>
       )}
-    </>
+    </div>
   );
 };
 export default Sider;

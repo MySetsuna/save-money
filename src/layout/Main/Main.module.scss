@@ -1,0 +1,24 @@
+.main {
+  display: flex;
+  flex: auto;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.loading {
+  &::before {
+    position: fixed;
+    content: 'loading...';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    /* margin: auto 50%; */
+    width: 100%;
+    height: 100%;
+    /* margin-bottom: 51px; */
+    top: 0;
+    /* pointer-events: none; */
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+}

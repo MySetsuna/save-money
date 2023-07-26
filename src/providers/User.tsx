@@ -6,7 +6,6 @@ import {
   createEffect,
   createMemo
 } from 'solid-js';
-import { useNavigate } from '@solidjs/router';
 import { UserCotextValue, WithChildrenComponent } from '../types';
 
 const UserContext = createContext<UserCotextValue>();
@@ -15,11 +14,17 @@ const fetchUser = async (userId?: number) => {
   return await new Promise<{ id: number; userName: string }>(
     (resolve, reject) => {
       setTimeout(() => {
-        console.log(userId, 'useId');
-        if (userId == null) {
+        resolve({ id: 5, userName: 'JACK' });
+        const ticket = localStorage.getItem(`USER_TICKET_KEY_${userId}`);
+        if (!ticket) {
           reject(new Error('no sign in'));
         }
-        resolve({ id: 1, userName: 'Jack' });
+        const userInfoStr = localStorage.getItem(`USER_INFO_KEY_${userId}`);
+        const userInfo = JSON.parse(userInfoStr ?? 'null');
+        if (userInfo) {
+          resolve(userInfo);
+        }
+        reject(new Error('no sign in'));
       }, 1000);
     }
   );
@@ -28,17 +33,12 @@ const fetchUser = async (userId?: number) => {
 export const UserProvider: WithChildrenComponent<{ userId?: number }> = (
   props
 ) => {
-  const navigate = useNavigate();
   const localUserId = localStorage.getItem('userId');
   const [userId, setUserId] = createSignal(
     localUserId ? parseInt(localUserId) : 5
   );
-  const [user, { mutate, refetch }] = createResource(userId, fetchUser);
-
-  createEffect(() => {
-    if (user.error) {
-      navigate('./login', { replace: true });
-    }
+  const [user, { mutate, refetch }] = createResource(userId, fetchUser, {
+    initialValue: { id: -1, userName: 'User' },
   });
 
   createEffect(() => {
@@ -51,11 +51,12 @@ export const UserProvider: WithChildrenComponent<{ userId?: number }> = (
     user,
     setUserId,
     mutate,
-    refetch
+    refetch,
   }));
 
   return (
     <UserContext.Provider value={contextValue}>
+      {user.error}
       {props.children}
     </UserContext.Provider>
   );
