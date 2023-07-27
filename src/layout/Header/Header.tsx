@@ -6,27 +6,25 @@ import { useLocalConfig } from '../../providers/LocalConfig';
 import config from '../../config';
 
 const Header: Component = () => {
-  const userStore = useUser();
-  const localConfigStore = useLocalConfig();
+  const [userStore] = useUser();
+  const [configStore] = useLocalConfig();
   const { headerMap } = config;
   return (
     <nav class={styles.nav}>
       <div class={styles.navContent}>
-        {localConfigStore().header instanceof Array
+        {configStore.header instanceof Array
           ? (
-          <For each={localConfigStore().header as string[]}>
+          <For each={configStore.header as string[]}>
             {(header) => {
               return <Dynamic component={headerMap[header]} />;
             }}
           </For>
             )
           : (
-          <Dynamic component={headerMap[localConfigStore().header as string]} />
+          <Dynamic component={headerMap[configStore.header as string]} />
             )}
         <div style={{ 'padding-left': '10px', width: '50px' }}>
-          <Suspense fallback={'loading...'}>
-            {userStore().user().userName}
-          </Suspense>
+          <Suspense fallback={'loading...'}>{userStore().userName}</Suspense>
         </div>
       </div>
     </nav>

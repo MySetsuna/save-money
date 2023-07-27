@@ -7,10 +7,10 @@ import { WithChildrenComponent } from '../../types';
 
 const Sider: WithChildrenComponent<{ className?: string }> = (props) => {
   const childContent = children(() => props.children);
-  const configStore = useLocalConfig();
+  const [configStore, setConfigStore] = useLocalConfig();
   const [store, setStore] = createStore({
     moving: false,
-    hidden: configStore().mainSiderWidth < MIN_MAIN_SIDER_WIDTH,
+    hidden: configStore.mainSiderWidth < MIN_MAIN_SIDER_WIDTH,
   });
 
   const handleMouseDown = (event: MouseEvent) => {
@@ -22,7 +22,7 @@ const Sider: WithChildrenComponent<{ className?: string }> = (props) => {
   };
 
   const handleMouseMove = (event: MouseEvent) => {
-    configStore().setMainSiderWidth(event.clientX);
+    setConfigStore({ mainSiderWidth: event.clientX });
     if (event.clientX < MIN_MAIN_SIDER_WIDTH) {
       setStore({ hidden: true });
     } else if (event.clientX >= MIN_MAIN_SIDER_WIDTH || store.hidden) {
@@ -41,7 +41,7 @@ const Sider: WithChildrenComponent<{ className?: string }> = (props) => {
   const handleTouchMove = (event: TouchEvent) => {
     console.log(event, 'event');
 
-    configStore().setMainSiderWidth(event.changedTouches[0].clientX);
+    setConfigStore({ mainSiderWidth: event.changedTouches[0].clientX });
     if (event.changedTouches[0].clientX < MIN_MAIN_SIDER_WIDTH) {
       setStore({ hidden: true });
     } else if (
@@ -65,41 +65,27 @@ const Sider: WithChildrenComponent<{ className?: string }> = (props) => {
     <div class={styles.sider}>
       <div
         class={[styles.siderBox, props.className].join(' ')}
-        classList={{ [styles.hidden]: store.hidden }}
-        style={{ width: `${configStore().mainSiderWidth}px` }}
+        style={{
+          width: store.hidden ? '3px' : `${configStore.mainSiderWidth}px`,
+        }}
       >
-        {childContent()}
-        <div
-          class={styles.dragBar}
-          draggable
-          onMouseDown={handleMouseDown}
-          onTouchStart={handleTouchStart}
-        >
-          <div
-            style={{ 'background-color': `${configStore().siderResizerColor}` }}
-            classList={{
-              [styles.dragLine]: true,
-              [styles.moving]: store.moving,
-            }}
-          />
+        <div classList={{ [styles.hidden]: store.hidden }}>
+          {childContent()}
         </div>
       </div>
-      {store.hidden && (
+      <div
+        class={styles.dragBar}
+        onMouseDown={handleMouseDown}
+        onTouchStart={handleTouchStart}
+      >
         <div
-          class={styles.leftDragBar}
-          draggable
-          onMouseDown={handleMouseDown}
-          onTouchStart={handleTouchStart}
-        >
-          <div
-            style={{ 'background-color': `${configStore().siderResizerColor}` }}
-            classList={{
-              [styles.dragLine]: true,
-              [styles.moving]: store.moving,
-            }}
-          />
-        </div>
-      )}
+          style={{ 'background-color': `${configStore.siderResizerColor}` }}
+          classList={{
+            [styles.dragLine]: true,
+            [styles.moving]: store.moving,
+          }}
+        />
+      </div>
     </div>
   );
 };

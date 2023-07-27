@@ -21,6 +21,7 @@
   position: absolute;
   height: 100%;
   right: 0;
+  top: 0;
   box-sizing: border-box;
   width: 10px;
   cursor: w-resize;
@@ -29,27 +30,6 @@
     opacity: 0;
     width: 4px;
     background-color: pink;
-    height: 100%;
-    transition: all 0.3s ease-in-out;
-  }
-  &:hover {
-    .dragLine {
-      opacity: 1;
-    }
-  }
-}
-.leftDragBar {
-  display: flex;
-  justify-content: left;
-  height: 100%;
-  right: 0;
-  box-sizing: border-box;
-  width: 3px;
-  cursor: w-resize;
-  z-index: 100;
-  .dragLine {
-    opacity: 0;
-    width: 3px;
     height: 100%;
     transition: all 0.3s ease-in-out;
   }

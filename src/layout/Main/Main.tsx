@@ -5,13 +5,13 @@ import { RouteItem, WithChildrenComponent } from '../../types';
 import Sider from '../Sider/Sider';
 import RouteList from '../../components/RouteList/RouteList';
 const Main: WithChildrenComponent<{ routes: RouteItem[] }> = (props) => {
-  const userStore = useUser();
+  const [userStore] = useUser();
   const childrenContent = children(() => props.children);
   return (
     <>
       <main
         class={styles.main}
-        classList={{ [styles.loading]: userStore().user.loading }}
+        classList={{ [styles.loading]: userStore.loading }}
       >
         <Sider>
           <span># 菜单</span>

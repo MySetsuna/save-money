@@ -5,13 +5,13 @@ import config from './config';
 import RouteContent from './components/RouteContent/RouteContent';
 import Header from './layout/Header';
 import Main from './layout/Main';
-import SignIn from './pages/SignIn';
+import ErrorPage from './pages/ErrorPage';
 
 const App: Component = () => {
   return (
     <div class={styles.App}>
       <Header />
-      <ErrorBoundary fallback={SignIn}>
+      <ErrorBoundary fallback={ErrorPage}>
         <Main routes={config.routes}>
           <MainContent>
             <RouteContent routes={config.routes} />

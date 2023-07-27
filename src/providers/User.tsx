@@ -3,8 +3,7 @@ import {
   createContext,
   useContext,
   createResource,
-  createEffect,
-  createMemo
+  createEffect
 } from 'solid-js';
 import { UserCotextValue, WithChildrenComponent } from '../types';
 
@@ -47,15 +46,10 @@ export const UserProvider: WithChildrenComponent<{ userId?: number }> = (
     }
   });
 
-  const contextValue = createMemo(() => ({
-    user,
-    setUserId,
-    mutate,
-    refetch,
-  }));
+  const contextValue = [user, { setUserId, mutate, refetch }];
 
   return (
-    <UserContext.Provider value={contextValue}>
+    <UserContext.Provider value={contextValue as UserCotextValue}>
       {user.error}
       {props.children}
     </UserContext.Provider>

@@ -1,4 +1,4 @@
-import { createContext, useContext, createMemo } from 'solid-js';
+import { createContext, useContext } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import {
   DASHBOARDS_KEY,
@@ -40,33 +40,39 @@ export const LocalConfigProvider: WithChildrenComponent = (props) => {
     header: JSON.parse(header ?? 'null') ?? DEFAULT_HEADER,
   });
 
-  const contextValue = createMemo(() => {
-    return {
-      ...store,
-      setMainSiderWidth: (value: number) => {
-        setStore({ mainSiderWidth: value });
-        localStorage.setItem(MAIN_SIDER_WIDTH_KEY, `${value}`);
-      },
-      setDashboards: (value: DashboardType[]) => {
-        setStore({ dashboards: value });
-        localStorage.setItem(DASHBOARDS_KEY, JSON.stringify(value));
-      },
-      setSiderResizerColor: (value: ColorString) => {
-        setStore({ siderResizerColor: value });
-        localStorage.setItem(SIDER_RESIZER_COLOR_KEY, `${value}`);
-      },
-      setHeader: (value: string | string[]) => {
-        setStore({ header: value });
+  const contextValue = [
+    store,
+    (newStore: typeof store) => {
+      if (Reflect.has(newStore, 'mainSiderWidth')) {
+        const { mainSiderWidth } = newStore;
+        setStore({ mainSiderWidth });
+        localStorage.setItem(MAIN_SIDER_WIDTH_KEY, `${mainSiderWidth}`);
+      }
+      if (Reflect.has(newStore, 'dashboards')) {
+        const { dashboards } = newStore;
+        setStore({ dashboards });
+        localStorage.setItem(DASHBOARDS_KEY, JSON.stringify(dashboards));
+      }
+      if (Reflect.has(newStore, 'siderResizerColor')) {
+        const { siderResizerColor } = newStore;
+        setStore({ siderResizerColor });
+        localStorage.setItem(SIDER_RESIZER_COLOR_KEY, `${siderResizerColor}`);
+      }
+      if (Reflect.has(newStore, 'header')) {
+        const { header } = newStore;
+        setStore({ header });
         localStorage.setItem(
           HEADER_KEY,
-          typeof value === 'string' ? value : JSON.stringify(value)
+          typeof header === 'string' ? header : JSON.stringify(header)
         );
-      },
-    };
-  });
+      }
+    },
+  ];
 
   return (
-    <LocalConfigContext.Provider value={contextValue}>
+    <LocalConfigContext.Provider
+      value={contextValue as LocalConfigContextValue}
+    >
       {props.children}
     </LocalConfigContext.Provider>
   );
