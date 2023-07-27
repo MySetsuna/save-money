@@ -50,7 +50,6 @@ export const UserProvider: WithChildrenComponent<{ userId?: number }> = (
 
   return (
     <UserContext.Provider value={contextValue as UserCotextValue}>
-      {user.error}
       {props.children}
     </UserContext.Provider>
   );

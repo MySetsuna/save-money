@@ -34,6 +34,37 @@ export type UserCotextValue = [
   }
 ];
 
+export type CounterContextValue = [
+  InitializedResource<{
+    userId: number;
+    total: number;
+    balance: number;
+  }>,
+  {
+    mutate: Setter<{
+      userId: number;
+      total: number;
+      balance: number;
+    }>;
+    refetch: (_info?: unknown) =>
+      | {
+          userId: number;
+          total: number;
+          balance: number;
+        }
+      | Promise<
+          | {
+              userId: number;
+              total: number;
+              balance: number;
+            }
+          | undefined
+        >
+      | null
+      | undefined;
+  }
+];
+
 export type DashboardType = {
   name: string;
   key: string;
@@ -49,6 +80,7 @@ export type LocalConfigContextValue = [
     dashboards: DashboardType[];
     siderResizerColor: ColorString;
     header: string | string[];
+    isMobile: boolean;
   },
   (_newStore: {
     mainSiderWidth?: number;

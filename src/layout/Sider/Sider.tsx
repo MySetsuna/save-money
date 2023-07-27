@@ -1,53 +1,59 @@
 import { createStore } from 'solid-js/store';
-import { children } from 'solid-js';
+import { children, mergeProps, onMount } from 'solid-js';
 import styles from './Sider.module.scss';
 import { useLocalConfig } from '../../providers/LocalConfig';
 import { MIN_MAIN_SIDER_WIDTH } from '../../constant';
 import { WithChildrenComponent } from '../../types';
 
-const Sider: WithChildrenComponent<{ className?: string }> = (props) => {
+const Sider: WithChildrenComponent<{
+  className?: string;
+  minSiderWidth?: number;
+}> = (props) => {
+  let sider: HTMLDivElement | undefined;
   const childContent = children(() => props.children);
   const [configStore, setConfigStore] = useLocalConfig();
+
+  const merged = mergeProps({ minSiderWidth: MIN_MAIN_SIDER_WIDTH }, props);
   const [store, setStore] = createStore({
     moving: false,
-    hidden: configStore.mainSiderWidth < MIN_MAIN_SIDER_WIDTH,
+    hidden: false,
+    offsetX: 0,
+    startX: 0,
   });
 
   const handleMouseDown = (event: MouseEvent) => {
     event.preventDefault();
-    setStore({ moving: true });
+    setStore({ moving: true, startX: event.clientX });
+
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseup', clearEvent);
     document.body.style.cursor = 'w-resize';
   };
 
   const handleMouseMove = (event: MouseEvent) => {
-    setConfigStore({ mainSiderWidth: event.clientX });
-    if (event.clientX < MIN_MAIN_SIDER_WIDTH) {
+    const mainSiderWidth = event.clientX - store.offsetX;
+    if (store.startX === event.clientX) return;
+    setConfigStore({ mainSiderWidth });
+    if (mainSiderWidth < merged.minSiderWidth) {
       setStore({ hidden: true });
-    } else if (event.clientX >= MIN_MAIN_SIDER_WIDTH || store.hidden) {
+    } else if (mainSiderWidth >= merged.minSiderWidth || store.hidden) {
       setStore({ hidden: false });
     }
   };
 
-  const handleTouchStart = (event: TouchEvent) => {
-    console.log(event);
-
+  const handleTouchStart = () => {
     setStore({ moving: true });
     document.addEventListener('touchmove', handleTouchMove);
     document.addEventListener('touchend', clearEvent);
     document.body.style.cursor = 'w-resize';
   };
-  const handleTouchMove = (event: TouchEvent) => {
-    console.log(event, 'event');
 
-    setConfigStore({ mainSiderWidth: event.changedTouches[0].clientX });
-    if (event.changedTouches[0].clientX < MIN_MAIN_SIDER_WIDTH) {
+  const handleTouchMove = (event: TouchEvent) => {
+    const mainSiderWidth = event.changedTouches[0].clientX - store.offsetX;
+    setConfigStore({ mainSiderWidth });
+    if (mainSiderWidth < merged.minSiderWidth) {
       setStore({ hidden: true });
-    } else if (
-      event.changedTouches[0].clientX >= MIN_MAIN_SIDER_WIDTH ||
-      store.hidden
-    ) {
+    } else if (mainSiderWidth >= merged.minSiderWidth || store.hidden) {
       setStore({ hidden: false });
     }
   };
@@ -61,8 +67,15 @@ const Sider: WithChildrenComponent<{ className?: string }> = (props) => {
     document.body.style.cursor = 'default';
   };
 
+  onMount(() => {
+    setStore({
+      offsetX: sider?.offsetLeft,
+      hidden: configStore.mainSiderWidth < merged.minSiderWidth,
+    });
+  });
+
   return (
-    <div class={styles.sider}>
+    <div class={styles.sider} ref={sider}>
       <div
         class={[styles.siderBox, props.className].join(' ')}
         style={{

@@ -23,12 +23,16 @@ export const LocalConfigProvider: WithChildrenComponent = (props) => {
   const localDashboards = localStorage.getItem(DASHBOARDS_KEY);
   const siderResizerColor = localStorage.getItem(SIDER_RESIZER_COLOR_KEY);
   const header = localStorage.getItem(HEADER_KEY);
+  const isMobile = !!navigator.userAgent.match(
+    /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+  )?.length;
 
   const [store, setStore] = createStore<{
     mainSiderWidth: number;
     dashboards: DashboardType[];
     siderResizerColor: ColorString;
     header: string | string[];
+    isMobile: boolean;
   }>({
     mainSiderWidth:
       parseInt(localMainSiderWidthd as string) ?? DEFAULT_SIDER_SIDER_WIDTH,
@@ -38,6 +42,7 @@ export const LocalConfigProvider: WithChildrenComponent = (props) => {
     ],
     siderResizerColor: siderResizerColor ?? DEFAULT_SIDER_RESIZER_COLOR,
     header: JSON.parse(header ?? 'null') ?? DEFAULT_HEADER,
+    isMobile,
   });
 
   const contextValue = [

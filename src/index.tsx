@@ -9,6 +9,7 @@ import { UserProvider } from './providers/User';
 import { LocalConfigProvider } from './providers/LocalConfig';
 import SignIn from './pages/SignIn';
 import CommonHeader from './layout/Header/components/CommonHeader';
+import CounterProvider from './providers/Counter';
 
 const root = document.getElementById('root');
 
@@ -31,7 +32,9 @@ render(
       >
         <UserProvider>
           <LocalConfigProvider>
-            <App />
+            <CounterProvider>
+              <App />
+            </CounterProvider>
           </LocalConfigProvider>
         </UserProvider>
       </ErrorBoundary>

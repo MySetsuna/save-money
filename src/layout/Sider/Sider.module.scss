@@ -2,18 +2,30 @@
   position: sticky;
   top: 0;
   left: 0;
-  max-height: calc(100vh - 64px);
+  max-height: calc(100vh - var(--cur-header-height));
   background-color: rgba(255, 255, 255, 1);
-  overflow: auto;
-  box-shadow: -3px 0px 8px 0px;
+  overflow: visible;
+  // box-shadow: -3px 0px 8px 0px;
   z-index: 1;
   flex-shrink: 0;
+  &::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 30px;
+    right: -30px;
+    top: 0;
+    box-shadow: inset 10px 0 7px -10px rgb(0 0 0 / 45%);
+  }
 }
 .siderBox {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   flex-shrink: 0;
+  height: 100%;
+  overflow: auto;
+  overflow-x: hidden;
 }
 .dragBar {
   display: flex;
