@@ -23,7 +23,7 @@ const Header: Component = () => {
           : (
           <Dynamic component={headerMap[configStore.header as string]} />
             )}
-        <div style={{ 'padding-left': '10px', width: '50px' }}>
+        <div style={{ 'padding-left': '10px', width: '20%' }}>
           <Suspense fallback={'loading...'}>{userStore().userName}</Suspense>
         </div>
       </div>

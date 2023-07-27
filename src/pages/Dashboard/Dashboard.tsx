@@ -4,7 +4,7 @@ import config from '../../config';
 import { useLocalConfig } from '../../providers/LocalConfig';
 
 const Dashboard: Component = () => {
-  const configStore = useLocalConfig();
+  const [configStore] = useLocalConfig();
 
   return (
     <div
@@ -15,7 +15,7 @@ const Dashboard: Component = () => {
         'flex-wrap': 'wrap',
       }}
     >
-      <For each={configStore().dashboards}>
+      <For each={configStore.dashboards}>
         {(dashboard) => (
           <div style={{ width: `${dashboard.span}%`, 'min-width': '120px' }}>
             <Dynamic
