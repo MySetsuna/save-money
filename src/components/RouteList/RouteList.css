@@ -3,6 +3,15 @@
   flex-direction: column;
   box-sizing: border-box;
 }
+.list a {
+  height: 32px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
 .list :hover {
   border-left: 4px lightskyblue solid;
+}
+.active-link {
+  background-color: rgba(135, 206, 250, 0.3);
 }

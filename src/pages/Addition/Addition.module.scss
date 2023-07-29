@@ -1,0 +1,61 @@
+.addition {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 16px 24px;
+  justify-content: center;
+  align-items: center;
+  :global {
+    .usetype-box {
+      width: 100% !important;
+      display: flex;
+      column-gap: 10px;
+      input[type='text'] {
+        height: 24px;
+        width: 66%;
+        border: solid lightblue 1px;
+      }
+    }
+    fieldset {
+      margin: 0 !important;
+      gap: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    textarea,
+    select,
+    fieldset,
+    input[type='number'],
+    input[type='text'] {
+      flex-shrink: 0;
+      box-sizing: border-box;
+      width: 300px;
+      max-width: 300px;
+      min-height: 32px;
+      border: solid lightblue 1px;
+      border-radius: 4px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+    .row {
+      width: 100%;
+      div {
+        width: 30%;
+      }
+      display: flex;
+      gap: 15px;
+      //   justify-content: space-between;
+    }
+    .footer {
+      justify-content: center;
+      margin-top: 10px;
+    }
+  }
+}

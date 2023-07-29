@@ -1,7 +1,7 @@
 import { ErrorBoundary } from 'solid-js';
 /* @refresh reload */
 import { render } from 'solid-js/web';
-
+import 'solid-devtools'
 import './index.css';
 import App from './App';
 import { Router } from '@solidjs/router';

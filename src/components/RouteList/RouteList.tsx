@@ -9,7 +9,11 @@ const RouteList: Component<{
     <div class="list">
       <For each={props.routes}>
         {(item) => {
-          return <A href={item.key}>{item.value}</A>;
+          return (
+            <A href={item.key} activeClass="active-link" end={true}>
+              {item.value}
+            </A>
+          );
         }}
       </For>
     </div>

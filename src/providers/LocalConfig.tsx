@@ -20,6 +20,8 @@ const LocalConfigContext = createContext<LocalConfigContextValue>();
 
 export const LocalConfigProvider: WithChildrenComponent = (props) => {
   const localMainSiderWidthd = localStorage.getItem(MAIN_SIDER_WIDTH_KEY);
+  const fabX = localStorage.getItem('fabX');
+  const fabY = localStorage.getItem('fabY');
   const localDashboards = localStorage.getItem(DASHBOARDS_KEY);
   const siderResizerColor = localStorage.getItem(SIDER_RESIZER_COLOR_KEY);
   const header = localStorage.getItem(HEADER_KEY);
@@ -33,6 +35,8 @@ export const LocalConfigProvider: WithChildrenComponent = (props) => {
     siderResizerColor: ColorString;
     header: string | string[];
     isMobile: boolean;
+    fabX: number;
+    fabY: number;
   }>({
     mainSiderWidth:
       parseInt(localMainSiderWidthd as string) ?? DEFAULT_SIDER_SIDER_WIDTH,
@@ -43,6 +47,8 @@ export const LocalConfigProvider: WithChildrenComponent = (props) => {
     siderResizerColor: siderResizerColor ?? DEFAULT_SIDER_RESIZER_COLOR,
     header: JSON.parse(header ?? 'null') ?? DEFAULT_HEADER,
     isMobile,
+    fabX: fabX ? Number(fabX) : -1,
+    fabY: fabY ? Number(fabY) : -1,
   });
 
   const contextValue = [
@@ -70,6 +76,16 @@ export const LocalConfigProvider: WithChildrenComponent = (props) => {
           HEADER_KEY,
           typeof header === 'string' ? header : JSON.stringify(header)
         );
+      }
+      if (Reflect.has(newStore, 'fabX')) {
+        const { fabX } = newStore;
+        setStore({ fabX });
+        localStorage.setItem('fabX', `${fabX}`);
+      }
+      if (Reflect.has(newStore, 'fabY')) {
+        const { fabY } = newStore;
+        setStore({ fabY });
+        localStorage.setItem('fabY', `${fabY}`);
       }
     },
   ];

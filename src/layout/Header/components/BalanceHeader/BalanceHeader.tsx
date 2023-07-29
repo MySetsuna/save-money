@@ -14,10 +14,10 @@ import {
 // green yellow crimson
 const BalanceHeader = () => {
   // const [configStore] = useLocalConfig();
-  const [counterStore, { mutate }] = useCounter();
+  const [counterStore, { setCounter }] = useCounter();
   let bBox: HTMLDivElement | undefined;
 
-  Reflect.set(window, 'setCounter', mutate);
+  Reflect.set(window, 'setCounter', setCounter);
 
   const summary = createMemo(() => {
     const { total, balance } = counterStore();
@@ -79,7 +79,7 @@ const BalanceHeader = () => {
           </div>
         </div>
         <div class={styles.total}>
-          <div>总 {summary().cost}</div>
+          <div>总 {summary().total}</div>
           <div>日余 {summary().dayBalance}</div>
         </div>
       </div>

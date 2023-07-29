@@ -1,4 +1,4 @@
-import { Component, JSX, Setter, InitializedResource } from 'solid-js';
+import { Component, JSX, Setter, InitializedResource, Accessor } from 'solid-js';
 
 export type WithChildrenProps<P = {}> = P & { children: JSX.Element };
 export type WithChildrenComponent<P = {}> = Component<WithChildrenProps<P>>;
@@ -35,17 +35,17 @@ export type UserCotextValue = [
 ];
 
 export type CounterContextValue = [
-  InitializedResource<{
+  Accessor<{
     userId: number;
     total: number;
     balance: number;
   }>,
   {
-    mutate: Setter<{
+    setCounter: (_counter: {
       userId: number;
       total: number;
       balance: number;
-    }>;
+    }) => void;
     refetch: (_info?: unknown) =>
       | {
           userId: number;
@@ -74,26 +74,26 @@ export type DashboardType = {
 
 export type ColorString = string | number;
 
+export type configStore = {
+  mainSiderWidth?: number;
+  dashboards?: DashboardType[];
+  siderResizerColor?: ColorString;
+  header?: string | string[];
+  isMobile?: boolean;
+  fabX?: number;
+  fabY?: number;
+};
+
 export type LocalConfigContextValue = [
-  {
-    mainSiderWidth: number;
-    dashboards: DashboardType[];
-    siderResizerColor: ColorString;
-    header: string | string[];
-    isMobile: boolean;
-  },
-  (_newStore: {
-    mainSiderWidth?: number;
-    dashboards?: DashboardType[];
-    siderResizerColor?: ColorString;
-    header?: string | string[];
-  }) => void
+  configStore,
+  (_newStore: configStore) => void
 ];
 
 export type RouteItem = {
   key: string;
   value?: JSX.Element;
   component: Component;
+  noSider?: boolean;
 };
 
 export type ErrorPageProps = {
