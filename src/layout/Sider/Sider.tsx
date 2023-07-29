@@ -81,7 +81,9 @@ const Sider: WithChildrenComponent<{
       <div
         class={[styles.siderBox, props.className].join(' ')}
         style={{
-          width: store.hidden ? '3px' : `${configStore.mainSiderWidth}px`,
+          width: store.hidden
+            ? (configStore.isMobile && '30px') || '3px'
+            : `${configStore.mainSiderWidth}px`,
         }}
       >
         <div classList={{ [styles.hidden]: store.hidden }}>
@@ -92,6 +94,7 @@ const Sider: WithChildrenComponent<{
         class={styles.dragBar}
         onMouseDown={handleMouseDown}
         onTouchStart={handleTouchStart}
+        style={{ width: configStore.isMobile ? '50px' : '10px' }}
       >
         <div
           style={{ 'background-color': `${configStore.siderResizerColor}` }}
