@@ -3,8 +3,9 @@ import { createStore } from 'solid-js/store';
 import {
   DASHBOARDS_KEY,
   DEFAULT_HEADER,
+  DEFAULT_MOBILE_SIDER_WIDTH,
   DEFAULT_SIDER_RESIZER_COLOR,
-  DEFAULT_SIDER_SIDER_WIDTH,
+  DEFAULT_SIDER_WIDTH,
   HEADER_KEY,
   MAIN_SIDER_WIDTH_KEY,
   SIDER_RESIZER_COLOR_KEY
@@ -39,7 +40,9 @@ export const LocalConfigProvider: WithChildrenComponent = (props) => {
     fabY: number;
   }>({
     mainSiderWidth:
-      parseInt(localMainSiderWidthd as string) ?? DEFAULT_SIDER_SIDER_WIDTH,
+      parseInt(localMainSiderWidthd as string) || isMobile
+        ? DEFAULT_MOBILE_SIDER_WIDTH
+        : DEFAULT_SIDER_WIDTH,
     dashboards: JSON.parse(localDashboards ?? 'null') || [
       { name: 'CostTypeBar', key: 'CostTypeBar', type: 'bar', span: 24 },
       { name: 'CostDailyList', key: 'CostDailyList', type: 'list', span: 24 },

@@ -8,7 +8,8 @@ export const HEADER_KEY = 'header';
 // ==================default values==========================
 
 export const DEFAULT_SIDER_RESIZER_COLOR = 'pink';
-export const DEFAULT_SIDER_SIDER_WIDTH = 300;
+export const DEFAULT_SIDER_WIDTH = 100;
+export const DEFAULT_MOBILE_SIDER_WIDTH = 75;
 export const DEFAULT_HEADER = 'BalanceHeader';
 // ------------------ Balanceheader Values --------------------------------
 export const BALANCE_LAVEL_HIGHT = 'hight';
@@ -31,4 +32,4 @@ export const CSS_BAR_COLOR = '--bar-color';
 
 // ==================== limit values====================================
 
-export const MIN_MAIN_SIDER_WIDTH = 100;
+export const MIN_MAIN_SIDER_WIDTH = 75;

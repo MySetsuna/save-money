@@ -68,6 +68,8 @@ const Sider: WithChildrenComponent<{
   };
 
   onMount(() => {
+    console.log(configStore.mainSiderWidth, merged.minSiderWidth, '2222222222');
+
     setStore({
       offsetX: sider?.offsetLeft,
       hidden: (configStore.mainSiderWidth || 0) < merged.minSiderWidth,

@@ -7,6 +7,7 @@ import { useLocalConfig } from '@/providers/LocalConfig';
 import MainContent from '../MainContent';
 import { Outlet } from '@solidjs/router';
 import FloatingActionButton from '@/components/FloatingActionButton';
+import { MIN_MAIN_SIDER_WIDTH } from '@/constant';
 const Main: CommonComponent<{ routes: RouteItem[] }> = (props) => {
   const [userStore] = useUser();
   const [configStore] = useLocalConfig();
@@ -17,7 +18,11 @@ const Main: CommonComponent<{ routes: RouteItem[] }> = (props) => {
         classList={{ [styles.loading]: userStore.loading }}
       >
         <FloatingActionButton />
-        <Sider minSiderWidth={configStore.isMobile ? 50 : undefined}>
+        <Sider
+          minSiderWidth={
+            configStore.isMobile ? MIN_MAIN_SIDER_WIDTH : undefined
+          }
+        >
           <span># 菜单</span>
           <RouteList routes={props.routes.filter((item) => !item.noSider)} />
         </Sider>
