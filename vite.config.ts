@@ -19,6 +19,7 @@ export default defineConfig(({ mode }) => {
       devtools(),
       solidPlugin(),
     ],
+    base: env.BASE_URL,
     server: {
       port: 3000,
     },

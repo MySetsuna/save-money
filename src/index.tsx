@@ -1,10 +1,10 @@
 import { ErrorBoundary } from 'solid-js';
 /* @refresh reload */
 import { render } from 'solid-js/web';
-import 'solid-devtools'
+import 'solid-devtools';
 import './index.css';
 import App from './App';
-import { Router } from '@solidjs/router';
+import { hashIntegration, Router } from '@solidjs/router';
 import { UserProvider } from './providers/User';
 import { LocalConfigProvider } from './providers/LocalConfig';
 import SignIn from './pages/SignIn';
@@ -21,7 +21,9 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 
 render(
   () => (
-    <Router>
+    <Router
+      source={import.meta.env.MODE === 'gh' ? hashIntegration() : undefined}
+    >
       <ErrorBoundary
         fallback={() => (
           <>

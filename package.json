@@ -6,8 +6,11 @@
   "scripts": {
     "start": "vite",
     "dev": "vite",
+    "dev:gh": "vite --mode gh",
+    "build:gh": "tsc && vite build --mode gh",
     "build": "vite build",
-    "serve": "vite preview",
+    "preview": "vite preview",
+    "preview:gh": "vite preview --mode gh",
     "lint": "eslint --fix --ext .ts,.tsx ."
   },
   "license": "MIT",
