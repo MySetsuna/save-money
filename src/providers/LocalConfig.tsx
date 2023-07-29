@@ -40,9 +40,8 @@ export const LocalConfigProvider: WithChildrenComponent = (props) => {
     fabY: number;
   }>({
     mainSiderWidth:
-      parseInt(localMainSiderWidthd as string) || isMobile
-        ? DEFAULT_MOBILE_SIDER_WIDTH
-        : DEFAULT_SIDER_WIDTH,
+      parseInt(localMainSiderWidthd as string) ||
+      (isMobile ? DEFAULT_MOBILE_SIDER_WIDTH : DEFAULT_SIDER_WIDTH),
     dashboards: JSON.parse(localDashboards ?? 'null') || [
       { name: 'CostTypeBar', key: 'CostTypeBar', type: 'bar', span: 24 },
       { name: 'CostDailyList', key: 'CostDailyList', type: 'list', span: 24 },
