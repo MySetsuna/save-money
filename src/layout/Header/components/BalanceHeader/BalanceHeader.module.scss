@@ -30,8 +30,8 @@
   border-right: 0;
   overflow: hidden;
   transition: width 0.6s ease-in-out;
+  overflow: visible;
   &:hover {
-    overflow: visible;
     z-index: 2;
   }
 }
@@ -52,8 +52,8 @@
   overflow: hidden;
   z-index: 1;
   transition: width 0.6s ease-in-out;
+  overflow: visible;
   &:hover {
-    overflow: visible;
     z-index: 2;
   }
 }

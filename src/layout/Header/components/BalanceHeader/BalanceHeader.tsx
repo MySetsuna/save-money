@@ -73,13 +73,15 @@ const BalanceHeader = () => {
         }}
       >
         <div class={styles.cost} style={{ width: summary().costPercent }}>
-          <div>消 {summary().cost}</div>
-          <div>{summary().costPercent}</div>
+          <span>
+            消 {summary().cost} {summary().costPercent}
+          </span>
         </div>
         <div class={styles.box} style={{ width: summary().balancePercent }}>
           <div class={styles.balance}>
-            <div>余 {summary().balance}</div>
-            <div>{summary().balancePercent}</div>
+            <span>
+              余 {summary().balance} {summary().balancePercent}
+            </span>
           </div>
         </div>
         <div class={styles.total}>
