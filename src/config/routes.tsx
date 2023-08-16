@@ -6,7 +6,7 @@ const SignIn = lazy(() => import('@/pages/SignIn'));
 const Addition = lazy(() => import('@/pages/Addition'));
 const DetailPage = lazy(() => import('@/pages/DetailPage'));
 const routes: RouteItem[] = [
-  { key: '/dashboard', value: '主页', component: Dashboard },
+  { key: '/', value: '主页', component: Dashboard },
   { key: '/total', value: '总计', component: () => '总计' },
   {
     key: '/additem',
