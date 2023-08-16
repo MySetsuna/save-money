@@ -1,17 +1,28 @@
 .list {
   display: flex;
-  flex-direction: column;
   box-sizing: border-box;
-}
-.list a {
-  height: 32px;
-  padding: 0 20px;
-  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  flex: auto;
+  background-color: rgba(135, 206, 250, 0.3);
 }
 
-.list :hover {
-  border-left: 4px lightskyblue solid;
+.list a {
+  box-sizing: border-box;
+  flex: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .active-link {
-  background-color: rgba(135, 206, 250, 0.3);
+  border-top: 4px lightskyblue solid !important;
+}
+.add-link {
+}
+.normal-link {
+}
+
+.active-add-link .ring {
+  box-shadow: lightskyblue 1px 0 6px 5px;
 }

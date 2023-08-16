@@ -11,7 +11,6 @@ import Addition from './pages/Addition';
 const App: Component = () => {
   return (
     <div class={styles.App}>
-      <Header />
       <ErrorBoundary fallback={ErrorPage}>
         <Routes>
           <Route path="/add" component={Addition} />

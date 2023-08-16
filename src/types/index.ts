@@ -1,4 +1,10 @@
-import { Component, JSX, Setter, InitializedResource, Accessor } from 'solid-js';
+import {
+  Component,
+  JSX,
+  Setter,
+  InitializedResource,
+  Accessor
+} from 'solid-js';
 
 export type WithChildrenProps<P = {}> = P & { children: JSX.Element };
 export type WithChildrenComponent<P = {}> = Component<WithChildrenProps<P>>;
@@ -93,7 +99,8 @@ export type RouteItem = {
   key: string;
   value?: JSX.Element;
   component: Component;
-  noSider?: boolean;
+  noInMenu?: boolean;
+  linkComponent?: Component;
 };
 
 export type ErrorPageProps = {
