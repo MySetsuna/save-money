@@ -100,6 +100,7 @@ export type RouteItem = {
   value?: JSX.Element;
   component: Component;
   noInMenu?: boolean;
+  noInContent?: boolean;
   linkComponent?: Component;
 };
 

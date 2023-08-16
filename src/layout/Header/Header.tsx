@@ -6,7 +6,6 @@ import { useLocalConfig } from '../../providers/LocalConfig';
 import config from '../../config';
 
 const Header: Component = () => {
-  const [userStore] = useUser();
   const [configStore] = useLocalConfig();
   const { headerMap } = config;
   return (
@@ -23,9 +22,6 @@ const Header: Component = () => {
           : (
           <Dynamic component={headerMap[configStore.header as string]} />
             )}
-        <div style={{ 'padding-left': '10px', width: '15%' }}>
-          <Suspense fallback={'loading...'}>{userStore().userName}</Suspense>
-        </div>
       </div>
     </nav>
   );

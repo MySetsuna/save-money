@@ -10,8 +10,6 @@ const Dashboard: Component = () => {
     <div
       style={{
         display: 'flex',
-        gap: '24px',
-        margin: '24px',
         'flex-wrap': 'wrap',
       }}
     >

@@ -6,7 +6,7 @@
   --middle-bar-color: orange;
 
   --low-border-color: lightcoral;
-  --low-bar-color: orangered;
+  --low-bar-color: red;
 
   --border-color: var(--hight-border-color);
   --bar-color: var(--hight-bar-color);
@@ -84,6 +84,6 @@
   align-items: center;
   flex-direction: column;
   padding: 10px;
-  width: 65px;
+  width: 85px;
   flex-shrink: 0;
 }

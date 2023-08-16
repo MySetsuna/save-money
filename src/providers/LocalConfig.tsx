@@ -43,6 +43,7 @@ export const LocalConfigProvider: WithChildrenComponent = (props) => {
       parseInt(localMainSiderWidthd as string) ||
       (isMobile ? DEFAULT_MOBILE_SIDER_WIDTH : DEFAULT_SIDER_WIDTH),
     dashboards: JSON.parse(localDashboards ?? 'null') || [
+      { name: 'CostRing', key: 'CostRing', type: 'list', span: 100 },
       { name: 'CostTypeBar', key: 'CostTypeBar', type: 'bar', span: 24 },
       { name: 'CostDailyList', key: 'CostDailyList', type: 'list', span: 24 },
     ],

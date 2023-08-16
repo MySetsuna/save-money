@@ -27,6 +27,9 @@ const BalanceHeader = () => {
     const days = curMonthLastDay.diff(today, 'days') + 1;
 
     const cost = total - balance;
+    const costDays = today.get('D');
+    console.log(costDays, 'costDays');
+
     const balancePercentNumebr = Math.round((balance * 100) / total);
     return {
       costPercent: `${Math.round((cost * 100) / total)}%`,
@@ -35,6 +38,7 @@ const BalanceHeader = () => {
       cost,
       balance,
       dayBalance: Math.round((balance * 100) / days) / 100,
+      dayCost: Math.round((cost * 100) / costDays) / 100,
       balancePercentNumebr,
     };
   });
@@ -69,17 +73,18 @@ const BalanceHeader = () => {
         }}
       >
         <div class={styles.cost} style={{ width: summary().costPercent }}>
-          <div>{summary().cost}</div>
+          <div>消 {summary().cost}</div>
           <div>{summary().costPercent}</div>
         </div>
         <div class={styles.box} style={{ width: summary().balancePercent }}>
           <div class={styles.balance}>
-            <div>{summary().balance}</div>
+            <div>余 {summary().balance}</div>
             <div>{summary().balancePercent}</div>
           </div>
         </div>
         <div class={styles.total}>
           <div>总 {summary().total}</div>
+          <div>日消 {summary().dayCost}</div>
           <div>日余 {summary().dayBalance}</div>
         </div>
       </div>

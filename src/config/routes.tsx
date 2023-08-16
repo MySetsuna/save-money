@@ -9,10 +9,11 @@ const routes: RouteItem[] = [
   { key: '/', value: '主页', component: Dashboard },
   { key: '/total', value: '总计', component: () => '总计' },
   {
-    key: '/additem',
+    key: '/add',
     value: '添加',
     component: Addition,
     linkComponent: AddButton,
+    noInContent: true,
   },
   { key: '/detail', value: '详情', component: DetailPage },
   {
