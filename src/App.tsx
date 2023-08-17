@@ -1,4 +1,4 @@
-import { type Component, ErrorBoundary, createSignal, onMount } from 'solid-js';
+import { type Component, ErrorBoundary } from 'solid-js';
 import styles from './App.module.scss';
 import config from './config';
 import RouteContent from './components/RouteContent/RouteContent';
@@ -8,13 +8,8 @@ import ErrorPage from './pages/ErrorPage';
 import { Outlet, Route, Routes } from '@solidjs/router';
 
 const App: Component = () => {
-  const [appHeight, setAppHeight] = createSignal('100%');
-  onMount(() => {
-    console.log(window.outerHeight, 'document.body.offsetHeight');
-    setAppHeight(`${window.outerHeight}px`);
-  });
   return (
-    <div class={styles.App} style={{ height: appHeight() }}>
+    <div class={styles.App}>
       {/* <Header /> */}
       <ErrorBoundary fallback={ErrorPage}>
         <Routes>
