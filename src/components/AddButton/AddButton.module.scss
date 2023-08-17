@@ -1,7 +1,6 @@
 .fabBox {
   -webkit-user-select: none;
   user-select: none;
-  z-index: 100;
   top: -20px;
   display: flex;
   justify-content: center;
@@ -11,7 +10,7 @@
       position: absolute;
       width: 50px;
       height: 50px;
-      border: 10px solid rgba(135, 206, 250, 0.3);
+      border: 10px solid var(--bar-color);
       border-radius: 50%;
       box-sizing: border-box;
     }
@@ -32,7 +31,7 @@
     .block {
       width: calc((100% - 10px) / 2);
       height: calc((100% - 10px) / 2);
-      background-color: rgba(135, 206, 250, 0.3);
+      background-color: var(--bar-color);
       z-index: 2;
     }
   }

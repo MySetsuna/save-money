@@ -1,13 +1,10 @@
 .menu {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  height: 50px;
+  display: flex;
   background-color: #fff;
   overflow: visible;
   z-index: 1;
-  flex-shrink: 0;
   width: 100vw;
+  font-size: 14px;
   // &::after {
   //   content: '';
   //   position: absolute;
@@ -24,6 +21,7 @@
   box-sizing: border-box;
   flex-shrink: 0;
   height: 100%;
+  width: 100%;
   overflow: auto;
   overflow-x: hidden;
 }

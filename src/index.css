@@ -5,6 +5,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --hight-border-color: lightgreen;
+  --hight-bar-color: limegreen;
+
+  --middle-border-color: lightsalmon;
+  --middle-bar-color: salmon;
+
+  --low-border-color: lightcoral;
+  --low-bar-color: red;
+
+  --border-color: var(--hight-border-color);
+  --bar-color: var(--hight-bar-color);
 }
 
 code {

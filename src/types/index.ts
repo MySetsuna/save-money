@@ -68,7 +68,17 @@ export type CounterContextValue = [
         >
       | null
       | undefined;
-  }
+  },
+  Accessor<{
+    costPercent: string;
+    balancePercent: string;
+    total: number;
+    cost: number;
+    balance: number;
+    dayBalance: number;
+    dayCost: number;
+    balancePercentNumebr: number;
+  }>
 ];
 
 export type DashboardType = {

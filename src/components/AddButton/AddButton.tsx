@@ -1,9 +1,13 @@
+import { Component, JSX } from 'solid-js';
 import styels from './AddButton.module.scss';
 
-const AddButton = () => {
+const AddButton: Component<{ class?: string; style?: JSX.CSSProperties }> = (
+  props
+) => {
   return (
     <div
-      class={styels.fabBox}
+      class={[styels.fabBox, props.class].join(' ')}
+      style={props.style}
       onClick={() => {
         console.log('tianjia');
       }}

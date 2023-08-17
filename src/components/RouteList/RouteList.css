@@ -1,10 +1,8 @@
 .list {
   display: flex;
   box-sizing: border-box;
-  height: 100%;
   width: 100%;
-  flex: auto;
-  background-color: rgba(135, 206, 250, 0.3);
+  background-color: var(--border-color);
 }
 
 .list a {
@@ -13,10 +11,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
+  color: inherit;
 }
 
 .active-link {
-  border-top: 4px lightskyblue solid !important;
+  border-top: 4px var(--bar-color) solid !important;
+  background: linear-gradient(
+    180deg,
+    var(--bar-color) -106%,
+    rgba(135, 206, 250, 0) 67%
+  );
 }
 .add-link {
 }
@@ -24,5 +29,5 @@
 }
 
 .active-add-link .ring {
-  box-shadow: lightskyblue 1px 0 6px 5px;
+  box-shadow: var(--bar-color) 1px 0 6px 5px;
 }
