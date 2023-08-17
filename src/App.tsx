@@ -10,11 +10,8 @@ import { Outlet, Route, Routes } from '@solidjs/router';
 const App: Component = () => {
   const [appHeight, setAppHeight] = createSignal('100%');
   onMount(() => {
-    console.log(window.innerHeight, 'document.body.offsetHeight');
-    setAppHeight(`${window.innerHeight}px`);
-    window.onresize = () => {
-      setAppHeight(`${window.innerHeight}px`);
-    };
+    console.log(window.outerHeight, 'document.body.offsetHeight');
+    setAppHeight(`${window.outerHeight}px`);
   });
   return (
     <div class={styles.App} style={{ height: appHeight() }}>
