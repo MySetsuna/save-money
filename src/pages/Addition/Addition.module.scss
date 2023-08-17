@@ -46,7 +46,7 @@
       width: 100%;
       flex-direction: column;
       display: flex;
-      justify-content: flex-start;
+      justify-content: space-between;
       gap: 24px;
       align-items: center;
       flex: auto;
@@ -71,7 +71,7 @@
     }
 
     .footer {
-      top: 0;
+      bottom: 0;
       position: sticky;
       justify-content: center;
       gap: 0;

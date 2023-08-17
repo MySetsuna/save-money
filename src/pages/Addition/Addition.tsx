@@ -61,12 +61,6 @@ const Addition = () => {
     <>
       <div class={styles.addition}>
         <form ref={form}>
-          <div class="row footer">
-            <button type="button" onClick={() => window.history.go(-1)}>
-              取消
-            </button>
-            <button type="submit">确认</button>
-          </div>
           <span>Addition</span>
           <div class="editable-rows">
             <div class="row">
@@ -118,6 +112,12 @@ const Addition = () => {
               <div>备注</div>
               <textarea rows={4} placeholder="备注" name="remake" />
             </div>
+          </div>
+          <div class="row footer">
+            <button type="button" onClick={() => window.history.go(-1)}>
+              取消
+            </button>
+            <button type="submit">确认</button>
           </div>
         </form>
       </div>
