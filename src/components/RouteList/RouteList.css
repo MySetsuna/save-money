@@ -6,16 +6,18 @@
 }
 
 .list a {
+  font-weight: bold;
   box-sizing: border-box;
   flex: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  color: inherit;
+  color: lightslategray;
 }
 
 .active-link {
+  color: initial !important;
   border-top: 4px var(--bar-color) solid !important;
   background: linear-gradient(
     180deg,

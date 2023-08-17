@@ -46,7 +46,8 @@
       width: 100%;
       flex-direction: column;
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
+      gap: 24px;
       align-items: center;
       flex: auto;
       box-sizing: border-box;
@@ -74,13 +75,14 @@
       position: sticky;
       justify-content: center;
       gap: 0;
-      height: 30px;
+      height: 50px;
       button {
         border: 0;
         width: 50%;
-
+        font-weight: bolder;
+        font-size: 16px;
         &[type='button'] {
-          background-color: var(--border-color);
+          background-color: lightcoral;
         }
         &[type='submit'] {
           background-color: lightskyblue;
