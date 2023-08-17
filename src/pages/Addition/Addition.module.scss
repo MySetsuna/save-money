@@ -49,6 +49,7 @@
       justify-content: space-between;
       align-items: center;
       flex: auto;
+      box-sizing: border-box;
     }
     .editable-rows {
       display: flex;

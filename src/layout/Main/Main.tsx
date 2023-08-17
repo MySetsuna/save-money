@@ -25,7 +25,7 @@ const Main: CommonComponent<{ routes: RouteItem[] }> = (props) => {
           {pathname() !== '/add' && (
             <RouteList routes={props.routes.filter((item) => !item.noInMenu)} />
           )}
-          <BalanceHeader style={{ height: '32px' }} />
+          <BalanceHeader style={{ height: '50px' }} />
         </Menu>
         <MainContent>
           <Outlet />
