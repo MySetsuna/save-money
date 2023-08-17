@@ -60,8 +60,14 @@ const Addition = () => {
   return (
     <>
       <div class={styles.addition}>
-        <span>Addition</span>
         <form ref={form}>
+          <div class="row footer">
+            <button type="button" onClick={() => window.history.go(-1)}>
+              取消
+            </button>
+            <button type="submit">确认</button>
+          </div>
+          <span>Addition</span>
           <div class="editable-rows">
             <div class="row">
               <div>金额</div>
@@ -112,12 +118,6 @@ const Addition = () => {
               <div>备注</div>
               <textarea rows={4} placeholder="备注" name="remake" />
             </div>
-          </div>
-          <div class="row footer">
-            <button type="button" onClick={() => window.history.go(-1)}>
-              取消
-            </button>
-            <button type="submit">确认</button>
           </div>
         </form>
       </div>
