@@ -15,13 +15,13 @@ const Main: CommonComponent<{ routes: RouteItem[] }> = (props) => {
         class={styles.main}
         classList={{ [styles.loading]: userStore.loading }}
       >
-        <Menu>
-          <RouteList routes={props.routes.filter((item) => !item.noInMenu)} />
-          <BalanceHeader style={{ height: '50px' }} />
-        </Menu>
         <MainContent>
           <Outlet />
         </MainContent>
+        <Menu>
+          <BalanceHeader />
+          <RouteList routes={props.routes.filter((item) => !item.noInMenu)} />
+        </Menu>
       </main>
     </>
   );
